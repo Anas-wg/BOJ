@@ -9,7 +9,7 @@ tot_score = 0 # 누적 성적(sum 단위수x성적)
 for i in range(20):
     a = list(map(str, input().strip().split()))
     credit = float(a[1]) ## 학점
-    if a[2] == "P":
+    if a[2] == "P": ## Pass 과목은 거르기
         continue
     else:
         idx = grade_list.index(a[2]) ## 과목평점 대체
