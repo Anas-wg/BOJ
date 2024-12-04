@@ -1,39 +1,50 @@
-def dfs(graph, start, visited):
-    visited.add(start)
-    for neighbor in graph[start]:
-        if neighbor not in visited:
-            dfs(graph, neighbor, visited)
+from collections import deque
 
-def find_dead_ends(graph):
+adj = [[0] * 13 for _ in range(13)]
+adj[0][1] = adj[0][7] = 1
+adj[1][2] = adj[1][5] = 1
 
-    dead_ends = []
-    visited = set()
-    for node in graph:
-        if node not in visited:
-            dfs(graph, node, visited)
-    
-    for node in graph:
-        if len(graph[node]) == 1:
-            dead_ends.append((node, graph[node][0]))
-    
-    return dead_ends
 
-def main():
+def dfs(now):
+  for nxt in range(13):
+    if adj[now][nxt]:
+      dfs(nxt)
+  
 
-    with open("input.txt", "r") as f:
-        n, m = map(int, f.readline().strip().split())
-        graph = {}
-        for _ in range(m):
-            v, w = map(int, f.readline().strip().split())
-            graph.setdefault(v, []).append(w)
-            graph.setdefault(w, []).append(v)  
+dfs(0)
 
-    dead_ends = find_dead_ends(graph)
+def bfs():
+  dq = deque()
+  dq.append(0)
+  while dq:
+    # 현재 노드 pop
+    now = dq.popleft()
+    for nxt in range(13):
+    # 현재 노드와 연결된 다음 노드를 큐에 삽입
+      if adj[now][nxt]:
+        dq.append(nxt)
 
-    num_signs = len(dead_ends)
-    print(num_signs)
-    for dead_end in dead_ends:
-        print(f"{dead_end[0]} {dead_end[1]}")
+bfs()
 
-if __name__ == "__main__":
-    main()
+
+dx ,dy = (0,1,0,-1),(1,0,-1,0)
+chk = [[False] * 100 for _ in range(100)]
+N = int(input)
+
+
+def is_valid_coord(x, y):
+  return 0 <= y < N and 0 <= x < N
+
+def bfs (start_y, start_x):
+  q = deque()
+  q.append((start_y, start_x))
+  while len(q) > 0:
+    y, x = q.popleft()
+    chk[y][x] = True
+    # 4방향 간선
+    for k in range(4):
+      ny = y + dy[k]
+      nx = x + dx[k]
+      # 벽이 아닌지, 방문 여부 확인
+      if is_valid_coord(ny,nx) and not chk[ny][nx]:
+        q.append((ny,nx))
