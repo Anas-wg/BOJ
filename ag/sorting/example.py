@@ -43,3 +43,32 @@ def quick_sort(array, start, end):
   quick_sort(array, right + 1, end)
 
 # 파이썬 장점 퀵 정렬
+def quick_sort(array):
+  if len(array) <= 1:
+    return array
+  pivot = array[0]
+  tail = array[1:]
+  
+  left_side = [x for x in tail if x <= pivot] # 분할된 왼쪽 부분
+  right_side = [x for x in tail if x >= pivot] # 분할된 오른쪽 부분
+  return quick_sort(left_side) + [pivot] + quick_sort(right_side)
+
+
+
+# 계수 정렬
+count = [0] * (max(arr) + 1)
+
+for i in range(len(arr)):
+  count[arr[i]] += 1
+
+for i in range(len(count)):
+  for j in range(count[i]):
+    print(i, end= ' ')
+
+# 정렬 라이브러리 + Key 활용
+ex_arr = [('바나나', 3), ('사과', 1),('귤', 2)]
+
+def setting(data):
+  return data[1]
+
+result = sorted(ex_arr, key=setting)
