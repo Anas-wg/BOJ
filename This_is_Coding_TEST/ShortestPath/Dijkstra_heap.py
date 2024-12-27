@@ -13,12 +13,13 @@ distance = [INF] * (N + 1)
 
 # 모든 간선 정보 입력
 for i in range(M):
-  a, b, c = map(int, input().split())
-  graph[a].append((b, c))
+  a, b, c = map(int, input().split()) # 1 2 2 
+  graph[a].append((b, c)) # [[2, 2]] 입력
+
 
 # 다익스트라
 def dijkstra(start):
-  q = []
+  q = [] # Proirity Queue
   # q리스트에 (거리, 노드) 형식으로 저장
   heapq.heappush(q, (0, start))
   # 출발노드는 0
