@@ -14,6 +14,7 @@ distance = [INF] * (N + 1)
 # 모든 간선 정보 입력
 for i in range(M):
   a, b, c = map(int, input().split()) # 1 2 2 
+  # (다음 거리, 노드)
   graph[a].append((b, c)) # [[2, 2]] 입력
 
 
