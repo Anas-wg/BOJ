@@ -1,18 +1,22 @@
 from collections import deque
 
-def Breadth_First_Search(graph, start, visited):
-  # deque 라이브러리 활용하여 큐 구현
-  q = deque([start])
-  # 시작 노드 방문처리
-  visited[start] = True
-  while q:
-    # 노드 하나 꺼내기
-    v = q.popleft()
-    print(v, end=' ')
+def breadth_first_search(graph, start, visited):
+  # 큐 생성(deque 자료형 활용) 및 시작노드 삽입
+  queue = deque([start])
+  # 큐가 빌때 까지
+  while queue:
+    # 노드 꺼내기
+    v = queue.popleft()
+    print(v, end= ' ')
+    visited[start] = True
+    # 꺼낸 노드의 인접노드 중
     for i in graph[v]:
+      # 미방문 노드를 큐에 삽입
       if not visited[i]:
-        q.append(i)
+        queue.append(i)
+        # 방문 처리
         visited[i] = True
+
 
 graph = [
   [], # 0번 노드는 없으니까
@@ -28,4 +32,4 @@ graph = [
 
 visited = [False] * 9
 
-Breadth_First_Search(graph, 1, visited)
+breadth_first_search(graph, 1, visited)
